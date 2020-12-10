@@ -47,7 +47,8 @@ figure {
 
 /* ========================= Header =========================*/
 
-header {
+header,
+main {
     padding: 15px 0 5px;
     margin: 0 15px;
 }
