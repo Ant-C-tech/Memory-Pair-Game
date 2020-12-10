@@ -27,7 +27,7 @@
 
 body {
     background: #000;
-    max-width: 1800px;
+    max-width: 1600px;
     margin: 0 auto;
 }
 
@@ -70,9 +70,18 @@ header {
 
 .titleBlock__subtitle {
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
     text-align: center;
     font-family: "Kaushan Script", cursive;
     font-size: 28px;
+    color: #ffffff;
+}
+
+.titleBlock__text {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-family: "Kaushan Script", cursive;
+    font-size: 22px;
     color: #ffffff;
 }
