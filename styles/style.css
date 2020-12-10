@@ -29,6 +29,8 @@ body {
     background: #000;
     max-width: 1200px;
     margin: 0 auto;
+    position: relative;
+    overflow: hidden;
 }
 
 a {
@@ -87,6 +89,13 @@ main {
     color: #ffffff;
 }
 
+.startBtnIco {
+    display: block;
+    margin: 0 auto;
+    width: 80px;
+    margin-bottom: 20px;
+}
+
 .startBtn {
     width: fit-content;
     margin: 0 auto;
@@ -96,6 +105,14 @@ main {
     color: #ffffff;
     animation: text-flicker 3s linear infinite;
     cursor: pointer;
+}
+
+.startBtnImg {
+    position: absolute;
+    height: 1200px;
+    opacity: 0.07;
+    transform: rotate(-135deg) translateY(800px) translateX(100px);
+    z-index: -10;
 }
 
 @keyframes text-flicker {
