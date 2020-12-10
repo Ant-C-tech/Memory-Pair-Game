@@ -1,0 +1,43 @@
+  /* ========================= Common styles =========================*/
+  
+  *,
+  *:before,
+  *:after {
+      box-sizing: border-box;
+  }
+  /* SCROLLBAR STYLES */
+  
+   ::-webkit-scrollbar {
+      width: 5px;
+  }
+  
+   ::-webkit-scrollbar-track {
+      margin: 10px;
+      background-color: #f5f5f5;
+      border-radius: 2px;
+  }
+  
+   ::-webkit-scrollbar-thumb {
+      background-color: #000;
+      border: 1px solid #fff;
+      border-radius: 2px;
+  }
+  
+  body {
+      background: #000;
+      max-width: 1800px;
+      margin: 0 auto;
+  }
+  
+  a {
+      text-decoration: none;
+      cursor: pointer;
+  }
+  
+  a:visited {
+      text-decoration: none;
+  }
+  
+  figure {
+      margin: 10px;
+  }
