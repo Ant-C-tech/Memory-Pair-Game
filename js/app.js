@@ -5,6 +5,7 @@ import hiragana from './hiragana.js'
 const MAIN = document.querySelector('#main')
 const HEADER = document.querySelector('#header')
 const DESCRIPT = document.querySelector('#descript')
+const TASK = []
     //Music
 const GAMEPLAY_AUDIO = new Audio('./audio/Japanese_Countryside.mp3')
 GAMEPLAY_AUDIO.loop = true
@@ -12,6 +13,8 @@ GAMEPLAY_AUDIO.volume = 0.01
 
 
 MAIN.append(createGreeting())
+setTask()
+console.log(TASK);
 
 
 function createGreeting() {
@@ -103,4 +106,16 @@ function hideElem(elem, effect) {
     elem.addEventListener('animationend', function() {
         elem.style.display = 'none'
     }, { once: true })
+}
+
+function setTask() {
+    for (let index = 0; index < 6; index++) {
+        TASK.push(hiragana[_getRandomIntInclusive(0, hiragana.length - 1)])
+    }
+}
+
+function _getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1) + min);
 }
