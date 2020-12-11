@@ -10,16 +10,15 @@ GAMEPLAY_AUDIO.volume = 0.2
 MAIN.append(createGreeting())
 
 
-
 function createGreeting() {
-
     const greeting = document.createElement('h3')
-    greeting.textContent = 'Kottans present...'
+    greeting.textContent = 'Kottans present'
     greeting.classList.add('greeting')
 
     greeting.addEventListener('click', function() {
         GAMEPLAY_AUDIO.play()
-
+        changeContent(createStartGameScr())
+        document.querySelector('header').style.opacity = 1
     }, { once: true })
 
     return greeting
@@ -43,25 +42,22 @@ function createStartGameScr() {
     startBtnImg.classList.add('startBtnImg')
 
     startBtnWrapper.append(startBtnIco, startBtn, startBtnImg)
-    startBtn.addEventListener('click', hideMain, { once: true })
+    startBtn.addEventListener('click', changeContent(createGameField()), { once: true })
 
     return startBtnWrapper
 }
 
-
-function changeContent() {
-
+function createGameField() {
+    const gameField = document.createElement('div')
+    gameField.classList.add('cardsContainer')
 }
 
-function hideMain() {
+
+function changeContent(content) {
     MAIN.classList.add('main-hide')
-    MAIN.addEventListener('transitionend', clearMain, { once: true })
-}
-
-function showMain() {
-    MAIN.classList.remove('main-hide')
-}
-
-function clearMain() {
-    MAIN.innerHTML = ''
+    MAIN.addEventListener('transitionend', function() {
+        MAIN.innerHTML = ''
+        MAIN.append(content)
+        MAIN.classList.remove('main-hide')
+    }, { once: true })
 }
