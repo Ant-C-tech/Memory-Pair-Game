@@ -1,14 +1,10 @@
 'use strict'
 
 const MAIN = document.querySelector('.main')
+addContent(createStartGameScr())
 
-initApp()
 
-function initApp() {
-    addStartGameScr()
-}
-
-function addStartGameScr() {
+function createStartGameScr() {
     const startBtnWrapper = new DocumentFragment()
 
     const startBtnIco = document.createElement('img')
@@ -26,13 +22,24 @@ function addStartGameScr() {
     startBtnImg.classList.add('startBtnImg')
 
     startBtnWrapper.append(startBtnIco, startBtn, startBtnImg)
-    MAIN.append(startBtnWrapper)
+    startBtn.addEventListener('click', hideMain, { once: true })
 
-    startBtn.addEventListener('click', function() {
-        hideElem()
-    })
+    return startBtnWrapper
 }
 
-function hideElem() {
+function addContent(content) {
+    MAIN.append(content)
+}
 
+function hideMain() {
+    MAIN.classList.add('main-hide')
+    MAIN.addEventListener('transitionend', clearMain, { once: true })
+}
+
+function showMain() {
+    MAIN.classList.remove('main-hide')
+}
+
+function clearMain() {
+    MAIN.innerHTML = ''
 }
