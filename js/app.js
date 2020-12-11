@@ -54,6 +54,11 @@ function createGameField() {
     for (let index = 0; index < 12; index++) {
         const card = document.createElement('div')
         card.classList.add('card')
+        const cardBack = document.createElement('img')
+        cardBack.setAttribute('src', '../img/card-back.jpeg')
+        cardBack.setAttribute('alt', 'japanese ornament')
+        cardBack.classList.add('cardBack')
+        card.appendChild(cardBack)
         gameField.appendChild(card)
     }
     return gameField

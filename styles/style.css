@@ -51,7 +51,7 @@ figure {
 
 header {
     padding: 15px 0 5px;
-    margin: 0 15px 50px;
+    margin: 0 15px;
     opacity: 0;
 }
 
@@ -109,7 +109,7 @@ header {
 
 .startBtnIco {
     display: block;
-    margin: 0 auto;
+    margin: 100px auto 0;
     width: 80px;
     margin-bottom: 20px;
 }
@@ -126,11 +126,15 @@ header {
     cursor: pointer;
 }
 
+.greeting {
+    margin-top: 100px;
+}
+
 .startBtnImg {
     position: absolute;
     height: 1200px;
     opacity: 0.07;
-    transform: rotate(-135deg) translateY(800px) translateX(100px);
+    transform: rotate(-135deg) translateY(900px) translateX(100px);
     z-index: -10;
 }
 
@@ -144,9 +148,15 @@ header {
     position: relative;
     margin: 15px;
     width: calc(25% - 30px);
-    height: 150px;
     border: 2px solid #fff;
     border-radius: 20px;
+    overflow: hidden;
+    max-height: 200px;
+}
+
+.cardBack {
+    width: 100%;
+    display: block;
 }
 
 @keyframes text-flicker {
