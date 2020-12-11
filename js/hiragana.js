@@ -340,6 +340,54 @@ const hiragana = [{
         jap: 'ぴゃ',
         eng: 'pya'
     },
+    {
+        jap: 'きゅ',
+        eng: 'kyu'
+    },
+    {
+        jap: 'しゅ',
+        eng: 'shu'
+    },
+    {
+        jap: 'ちゅ',
+        eng: 'chu'
+    },
+    {
+        jap: 'にゅ',
+        eng: 'nyu'
+    },
+    {
+        jap: 'ひゅ',
+        eng: 'hyu'
+    },
+    {
+        jap: 'みゅ',
+        eng: 'myu'
+    },
+    {
+        jap: 'りゅ',
+        eng: 'ryu'
+    },
+    {
+        jap: 'ぎゅ',
+        eng: 'gyu'
+    },
+    {
+        jap: 'じゅ',
+        eng: 'ju'
+    },
+    {
+        jap: 'ぢゅ',
+        eng: 'dja, ju'
+    },
+    {
+        jap: 'びゅ',
+        eng: 'byu'
+    },
+    {
+        jap: 'ぴゅ',
+        eng: 'pyu'
+    },
 ]
 
 export default hiragana
