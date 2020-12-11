@@ -176,6 +176,62 @@ const hiragana = [{
         jap: 'ぷ',
         eng: 'pu'
     },
+    {
+        jap: 'え',
+        eng: 'e'
+    },
+    {
+        jap: 'け',
+        eng: 'ke'
+    },
+    {
+        jap: 'せ',
+        eng: 'se'
+    },
+    {
+        jap: 'て',
+        eng: 'te'
+    },
+    {
+        jap: 'ね',
+        eng: 'ne'
+    },
+    {
+        jap: 'へ',
+        eng: 'he'
+    },
+    {
+        jap: 'め',
+        eng: 'me'
+    },
+    {
+        jap: 'れ',
+        eng: 're'
+    },
+    {
+        jap: 'ゑ',
+        eng: 'we'
+    },
+    {
+        jap: 'げ',
+        eng: 'ge'
+    },
+    {
+        jap: 'ぜ',
+        eng: 'ze'
+    },
+    {
+        jap: 'で',
+        eng: 'de'
+    },
+    {
+        jap: 'べ',
+        eng: 'be'
+    },
+    {
+        jap: 'ぺ',
+        eng: 'pe'
+    },
 ]
 
 export default hiragana
