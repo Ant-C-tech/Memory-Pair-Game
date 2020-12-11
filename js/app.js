@@ -1,5 +1,7 @@
 'use strict'
 
+import hiragana from './hiragana.js'
+
 const MAIN = document.querySelector('#main')
 const HEADER = document.querySelector('#header')
 const DESCRIPT = document.querySelector('#descript')
