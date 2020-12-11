@@ -1,10 +1,12 @@
 'use strict'
 
-const MAIN = document.querySelector('.main')
+const MAIN = document.querySelector('#main')
+const HEADER = document.querySelector('#header')
+const DESCRIPT = document.querySelector('#descript')
     //Music
 const GAMEPLAY_AUDIO = new Audio('./audio/Japanese_Countryside.mp3')
 GAMEPLAY_AUDIO.loop = true
-GAMEPLAY_AUDIO.volume = 0.05
+GAMEPLAY_AUDIO.volume = 0.01
 
 
 MAIN.append(createGreeting())
@@ -18,7 +20,7 @@ function createGreeting() {
     greeting.addEventListener('click', function() {
         GAMEPLAY_AUDIO.play()
         changeContent(createStartGameScr())
-        document.querySelector('header').classList.add('header-show')
+        HEADER.classList.add('header-show')
     }, { once: true })
 
     return greeting
@@ -42,7 +44,10 @@ function createStartGameScr() {
     startBtnImg.classList.add('startBtnImg')
 
     startBtnWrapper.append(startBtnIco, startBtn, startBtnImg)
-    startBtn.addEventListener('click', () => changeContent(createGameField()), { once: true })
+    startBtn.addEventListener('click', () => {
+        changeContent(createGameField())
+        hideElem(DESCRIPT, "animate__zoomOut")
+    }, { once: true })
 
 
     return startBtnWrapper
@@ -71,5 +76,13 @@ function changeContent(content) {
         MAIN.innerHTML = ''
         MAIN.append(content)
         MAIN.classList.remove('main-hide')
+    }, { once: true })
+}
+
+function hideElem(elem, effect) {
+    elem.classList.add(effect)
+    elem.addEventListener('animationend', function() {
+        elem.style.display = 'none'
+        console.log('work');
     }, { once: true })
 }
