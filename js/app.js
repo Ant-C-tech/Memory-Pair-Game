@@ -69,10 +69,10 @@ function createGameField() {
         const cardFace = document.createElement('div')
         cardFace.classList.add('cardFace')
         const japText = document.createElement('p')
-        japText.innerText = "あ"
+        japText.innerText = "ちゃ"
         japText.classList.add('japText')
         const engText = document.createElement('p')
-        engText.innerText = "a"
+        engText.innerText = "cha"
         engText.classList.add('engText')
         cardFace.append(japText, engText)
         card.append(cardBack, cardFace)

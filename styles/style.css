@@ -184,9 +184,9 @@ header {
 }
 
 .japText {
-    margin: 0;
+    margin: 10px 0;
     font-family: "Kaushan Script", cursive;
-    font-size: 150px;
+    font-size: 100px;
     text-align: center;
     color: #ffffff;
     line-height: 1;
@@ -195,7 +195,7 @@ header {
 .engText {
     margin: 0;
     font-family: "Kaushan Script", cursive;
-    font-size: 50px;
+    font-size: 60px;
     text-align: center;
     color: #ffffff;
     line-height: 1;
