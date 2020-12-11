@@ -1,8 +1,29 @@
 'use strict'
 
 const MAIN = document.querySelector('.main')
-addContent(createStartGameScr())
+    //Music
+const GAMEPLAY_AUDIO = new Audio('./audio/Japanese_Countryside.mp3')
+GAMEPLAY_AUDIO.loop = true
+GAMEPLAY_AUDIO.volume = 0.2
 
+
+MAIN.append(createGreeting())
+
+
+
+function createGreeting() {
+
+    const greeting = document.createElement('h3')
+    greeting.textContent = 'Kottans present...'
+    greeting.classList.add('greeting')
+
+    greeting.addEventListener('click', function() {
+        GAMEPLAY_AUDIO.play()
+
+    }, { once: true })
+
+    return greeting
+}
 
 function createStartGameScr() {
     const startBtnWrapper = new DocumentFragment()
@@ -27,8 +48,9 @@ function createStartGameScr() {
     return startBtnWrapper
 }
 
-function addContent(content) {
-    MAIN.append(content)
+
+function changeContent() {
+
 }
 
 function hideMain() {
