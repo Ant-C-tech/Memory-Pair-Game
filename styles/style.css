@@ -52,8 +52,12 @@ figure {
 header {
     padding: 15px 0 5px;
     margin: 0 15px 50px;
-    transition: opacity ease-in-out 3.5s;
     opacity: 0;
+}
+
+.header-show {
+    transition: opacity ease-in-out 4s;
+    opacity: 1;
 }
 
 .titleBlock {
@@ -128,6 +132,21 @@ header {
     opacity: 0.07;
     transform: rotate(-135deg) translateY(800px) translateX(100px);
     z-index: -10;
+}
+
+.cardsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -15px;
+}
+
+.card {
+    position: relative;
+    margin: 15px;
+    width: calc(25% - 30px);
+    height: 150px;
+    border: 2px solid #fff;
+    border-radius: 20px;
 }
 
 @keyframes text-flicker {

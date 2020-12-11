@@ -4,7 +4,7 @@ const MAIN = document.querySelector('.main')
     //Music
 const GAMEPLAY_AUDIO = new Audio('./audio/Japanese_Countryside.mp3')
 GAMEPLAY_AUDIO.loop = true
-GAMEPLAY_AUDIO.volume = 0.2
+GAMEPLAY_AUDIO.volume = 0.05
 
 
 MAIN.append(createGreeting())
@@ -18,7 +18,7 @@ function createGreeting() {
     greeting.addEventListener('click', function() {
         GAMEPLAY_AUDIO.play()
         changeContent(createStartGameScr())
-        document.querySelector('header').style.opacity = 1
+        document.querySelector('header').classList.add('header-show')
     }, { once: true })
 
     return greeting
@@ -42,7 +42,8 @@ function createStartGameScr() {
     startBtnImg.classList.add('startBtnImg')
 
     startBtnWrapper.append(startBtnIco, startBtn, startBtnImg)
-    startBtn.addEventListener('click', changeContent(createGameField()), { once: true })
+    startBtn.addEventListener('click', () => changeContent(createGameField()), { once: true })
+
 
     return startBtnWrapper
 }
@@ -50,6 +51,12 @@ function createStartGameScr() {
 function createGameField() {
     const gameField = document.createElement('div')
     gameField.classList.add('cardsContainer')
+    for (let index = 0; index < 12; index++) {
+        const card = document.createElement('div')
+        card.classList.add('card')
+        gameField.appendChild(card)
+    }
+    return gameField
 }
 
 
