@@ -152,11 +152,22 @@ header {
     border-radius: 20px;
     overflow: hidden;
     max-height: 230px;
+    transition: transform linear 0.75s;
+}
+
+.card-rotate {
+    transform: rotate3d(0, 1, 0, -180deg);
 }
 
 .cardBack {
+    position: relative;
     width: 100%;
     display: block;
+    transition: transform linear 0.5s;
+}
+
+.cardBack-rotate {
+    transform: rotate3d(0, 1, 0, 90deg);
 }
 
 @keyframes text-flicker {

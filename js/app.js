@@ -49,7 +49,6 @@ function createStartGameScr() {
         hideElem(DESCRIPT, "animate__zoomOut")
     }, { once: true })
 
-
     return startBtnWrapper
 }
 
@@ -64,11 +63,14 @@ function createGameField() {
         cardBack.setAttribute('alt', 'japanese ornament')
         cardBack.classList.add('cardBack')
         card.appendChild(cardBack)
+        card.addEventListener('click', () => {
+            card.classList.add('card-rotate')
+            cardBack.classList.add('cardBack-rotate')
+        })
         gameField.appendChild(card)
     }
     return gameField
 }
-
 
 function changeContent(content) {
     MAIN.classList.add('main-hide')
@@ -83,6 +85,5 @@ function hideElem(elem, effect) {
     elem.classList.add(effect)
     elem.addEventListener('animationend', function() {
         elem.style.display = 'none'
-        console.log('work');
     }, { once: true })
 }
