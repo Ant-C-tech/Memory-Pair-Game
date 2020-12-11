@@ -58,14 +58,29 @@ function createGameField() {
     for (let index = 0; index < 12; index++) {
         const card = document.createElement('div')
         card.classList.add('card')
+
         const cardBack = document.createElement('img')
         cardBack.setAttribute('src', '../img/card-back.jpeg')
         cardBack.setAttribute('alt', 'japanese ornament')
         cardBack.classList.add('cardBack')
-        card.appendChild(cardBack)
+
+        const cardFace = document.createElement('div')
+        cardFace.classList.add('cardFace')
+        const japText = document.createElement('p')
+        japText.innerText = "あ"
+        japText.classList.add('japText')
+        const engText = document.createElement('p')
+        engText.innerText = "a"
+        engText.classList.add('engText')
+        cardFace.append(japText, engText)
+        card.append(cardBack, cardFace)
+
         card.addEventListener('click', () => {
             card.classList.add('card-rotate')
             cardBack.classList.add('cardBack-rotate')
+            cardBack.addEventListener('transitionend', function() {
+                cardFace.classList.add('cardFace-rotate')
+            }, { once: true })
         })
         gameField.appendChild(card)
     }

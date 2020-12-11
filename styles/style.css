@@ -152,7 +152,7 @@ header {
     border-radius: 20px;
     overflow: hidden;
     max-height: 230px;
-    transition: transform linear 0.75s;
+    transition: transform linear 0.55s;
 }
 
 .card-rotate {
@@ -163,11 +163,42 @@ header {
     position: relative;
     width: 100%;
     display: block;
-    transition: transform linear 0.5s;
+    transition: transform linear 0.3s;
 }
 
 .cardBack-rotate {
     transform: rotate3d(0, 1, 0, 90deg);
+}
+
+.cardFace {
+    position: absolute;
+    transform: rotate3d(0, 1, 0, 90deg);
+    top: 0;
+    width: 90%;
+    transition: transform linear 0.25s;
+    padding-right: 30px;
+}
+
+.japText {
+    margin: 0;
+    font-family: "Kaushan Script", cursive;
+    font-size: 150px;
+    text-align: center;
+    color: #ffffff;
+    line-height: 1;
+}
+
+.engText {
+    margin: 0;
+    font-family: "Kaushan Script", cursive;
+    font-size: 50px;
+    text-align: center;
+    color: #ffffff;
+    line-height: 1;
+}
+
+.cardFace-rotate {
+    transform: rotate3d(0, 1, 0, 180deg);
 }
 
 @keyframes text-flicker {
