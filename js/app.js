@@ -9,7 +9,7 @@ const TASK = []
     //Music
 const GAMEPLAY_AUDIO = new Audio('./audio/Japanese_Countryside.mp3')
 GAMEPLAY_AUDIO.loop = true
-GAMEPLAY_AUDIO.volume = 0.01
+GAMEPLAY_AUDIO.volume = 0.2
 
 
 MAIN.append(createGreeting())
@@ -109,8 +109,18 @@ function hideElem(elem, effect) {
 }
 
 function setTask() {
-    for (let index = 0; index < 6; index++) {
-        TASK.push(hiragana[_getRandomIntInclusive(0, hiragana.length - 1)])
+    TASK.push(hiragana[_getRandomIntInclusive(0, hiragana.length - 1)])
+    while (TASK.length < 6) {
+        let currentItem = hiragana[_getRandomIntInclusive(0, hiragana.length - 1)]
+        let flag = false
+        for (const item of TASK) {
+            if (item.jap === currentItem.jap) {
+                flag = true
+            }
+        }
+        if (flag === false) {
+            TASK.push(currentItem)
+        }
     }
 }
 
