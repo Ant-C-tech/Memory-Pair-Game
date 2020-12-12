@@ -110,6 +110,11 @@ function createGameField() {
         card.append(cardBack, cardFace)
 
         card.addEventListener('click', () => {
+            MAIN.classList.add('main-notActive')
+            const timeOut = setTimeout(() => {
+                MAIN.classList.remove('main-notActive')
+                clearTimeout(timeOut)
+            }, 1000);
             card.classList.add('card-rotate')
             cardBack.classList.add('cardBack-rotate')
             cardBack.addEventListener('transitionend', function() {
@@ -203,6 +208,7 @@ function checkAnswer() {
     const openCards = document.querySelectorAll('.card-rotate')
     if (openCards.length === 2) {
         if (openCards[0].getAttribute('data-value') === openCards[1].getAttribute('data-value')) {
+            MAIN.classList.add('main-notActive')
             for (const elem of openCards) {
                 elem.classList.add('played')
                 const timeOut = setTimeout(() => {
@@ -216,6 +222,7 @@ function checkAnswer() {
             attempts++
             isWin()
         } else {
+            MAIN.classList.add('main-notActive')
             for (const card of openCards) {
                 const timeOut = setTimeout(() => {
                     card.classList.remove('card-rotate')
@@ -233,7 +240,6 @@ function checkAnswer() {
 
 function isWin() {
     const playedCards = document.querySelectorAll('.played')
-    console.log(playedCards);
     if (playedCards.length === CARDS_NUMBER) {
         window.removeEventListener('resize', phoneAdaptation)
         const timeout = setTimeout(() => {

@@ -128,6 +128,10 @@ header {
     transition: opacity ease-in-out 1s;
 }
 
+.main-notActive {
+    pointer-events: none;
+}
+
 .main-hide {
     opacity: 0;
 }
