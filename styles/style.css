@@ -1,5 +1,11 @@
 /* ========================= Common styles =========================*/
 
+html {
+    overflow: hidden;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url("../img/bg.jpg") top;
+    /* background: url(../img/bg.jpg); */
+}
+
 *,
 *:before,
 *:after {
@@ -20,17 +26,15 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #000;
     border: 1px solid #fff;
     border-radius: 2px;
 }
 
 body {
-    background: #000;
+    /* background-color: rgba(0, 0, 0, 0.85); */
     max-width: 1200px;
     margin: 0 auto;
     position: relative;
-    overflow: hidden;
 }
 
 a {
@@ -104,6 +108,7 @@ header {
 /* ========================= Main =========================*/
 
 .main {
+    min-height: 100vh;
     padding: 15px 0 5px;
     margin: 0 15px 50px;
     transition: opacity ease-in-out 1s;

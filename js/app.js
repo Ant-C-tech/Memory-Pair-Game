@@ -67,12 +67,7 @@ function createStartGameScr() {
     startBtn.textContent = 'Start Game'
     startBtn.classList.add('startBtn')
 
-    const startBtnImg = document.createElement('img')
-    startBtnImg.setAttribute('src', 'img/branches-with-leaves-svgrepo-com.svg')
-    startBtnImg.setAttribute('alt', 'branch with leaves')
-    startBtnImg.classList.add('startBtnImg')
-
-    startBtnWrapper.append(startBtnIco, startBtn, startBtnImg)
+    startBtnWrapper.append(startBtnIco, startBtn)
     startBtn.addEventListener('click', () => {
         changeContent(createGameField())
         hideElem(DESCRIPT, DESCRIPT_HIDE_ANIMATION, false)
@@ -145,12 +140,7 @@ function createCongratulationScr() {
     newGameBtn.textContent = 'A samurai has no goal, only path...'
     newGameBtn.classList.add('newGame')
 
-    const startBtnImg = document.createElement('img')
-    startBtnImg.setAttribute('src', 'img/branches-with-leaves-svgrepo-com.svg')
-    startBtnImg.setAttribute('alt', 'branch with leaves')
-    startBtnImg.classList.add('startBtnImg')
-
-    congratulationWrapper.append(congratulationIco, congratulation, congratulationText, congratulationSubText, startBtnImg, newGameBtn)
+    congratulationWrapper.append(congratulationIco, congratulation, congratulationText, congratulationSubText, newGameBtn)
 
     newGameBtn.addEventListener('click', function() {
         TASK = []
