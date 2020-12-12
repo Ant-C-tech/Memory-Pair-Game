@@ -91,6 +91,7 @@ header {
 }
 
 .titleBlock__text {
+    display: none;
     margin-top: 10px;
     margin-bottom: 10px;
     text-align: center;
@@ -132,6 +133,7 @@ header {
 }
 
 .greeting {
+    text-align: center;
     margin-top: 100px;
 }
 
@@ -224,7 +226,6 @@ header {
     text-align: center;
     font-family: "Kaushan Script", cursive;
     font-size: 32px;
-    /* letter-spacing: 0.2em; */
     color: #ffffff;
 }
 
@@ -300,5 +301,21 @@ header {
     100% {
         opacity: .9;
         text-shadow: 0px 0px 29px rgba(242, 22, 22, 1)
+    }
+}
+
+@media screen and (max-height: 570px) {
+    .greeting {
+        margin-top: 10px;
+    }
+}
+
+@media screen and (max-height: 370px) {
+    .titleBlock__title {
+        font-size: 30px;
+    }
+    .titleBlock__subtitle {
+        font-size: 20px;
+        margin-bottom: 5px;
     }
 }

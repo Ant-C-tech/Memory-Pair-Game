@@ -49,10 +49,7 @@ function createGreeting() {
 
     greeting.addEventListener('click', function() {
         GAMEPLAY_AUDIO.play()
-        changeContent(createStartGameScr())
-        HEADER.classList.add('header-show')
-            // DESCRIPT.classList.add(ANIMATE_DELAY)
-        showElem(DESCRIPT, DESCRIPT_SHOW_ANIMATION, true)
+        changeContent(createStartGameScr(), showHeader)
     }, { once: true })
 
     return greeting
@@ -165,11 +162,12 @@ function createCongratulationScr() {
     return congratulationWrapper
 }
 
-function changeContent(content) {
+function changeContent(content, callback) {
     MAIN.classList.add('main-hide')
     MAIN.addEventListener('transitionend', function() {
         MAIN.innerHTML = ''
         MAIN.append(content)
+        callback()
         MAIN.classList.remove('main-hide')
     }, { once: true })
 }
@@ -241,6 +239,11 @@ function isWin() {
             clearTimeout(timeout)
         }, 1500);
     }
+}
+
+function showHeader() {
+    HEADER.classList.add('header-show')
+    showElem(DESCRIPT, DESCRIPT_SHOW_ANIMATION, true)
 }
 
 function _getRandomIntInclusive(min, max) {
