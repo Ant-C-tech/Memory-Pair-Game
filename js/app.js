@@ -57,7 +57,7 @@ function createStartGameScr() {
     const startBtnWrapper = new DocumentFragment()
 
     const startBtnIco = document.createElement('img')
-    startBtnIco.setAttribute('src', '../img/lucky-cat-toy-svgrepo-com.svg')
+    startBtnIco.setAttribute('src', 'img/lucky-cat-toy-svgrepo-com.svg')
     startBtnIco.setAttribute('alt', 'mentor')
     startBtnIco.classList.add('startBtnIco')
 
@@ -66,7 +66,7 @@ function createStartGameScr() {
     startBtn.classList.add('startBtn')
 
     const startBtnImg = document.createElement('img')
-    startBtnImg.setAttribute('src', '../img/branches-with-leaves-svgrepo-com.svg')
+    startBtnImg.setAttribute('src', 'img/branches-with-leaves-svgrepo-com.svg')
     startBtnImg.setAttribute('alt', 'branch with leaves')
     startBtnImg.classList.add('startBtnImg')
 
@@ -90,7 +90,7 @@ function createGameField() {
         card.setAttribute('data-value', cardContent[0].jap)
 
         const cardBack = document.createElement('img')
-        cardBack.setAttribute('src', '../img/card-back.jpeg')
+        cardBack.setAttribute('src', 'img/card-back2.jpg')
         cardBack.setAttribute('alt', 'japanese ornament')
         cardBack.classList.add('cardBack')
 
@@ -143,8 +143,9 @@ function checkAnswer() {
     if (openCards.length === 2) {
         if (openCards[0].getAttribute('data-value') === openCards[1].getAttribute('data-value')) {
             for (const elem of openCards) {
+                elem.classList.add('played')
                 let timeOut = setTimeout(() => {
-                    elem.classList.add('animate__rotateOut')
+                    elem.classList.add(CARDS_HIDE_ANIMATION)
                     elem.addEventListener('animationend', function() {
                         elem.classList.remove('card-rotate')
                     }, { once: true })
@@ -170,8 +171,10 @@ function checkAnswer() {
 }
 
 function isWin() {
-    const playedCards = document.querySelectorAll(`.${CARDS_HIDE_ANIMATION}`)
+    const playedCards = document.querySelectorAll('.played')
+    console.log(playedCards);
     if (playedCards.length === CARDS_NUMBER) {
+        console.log('next');
         changeContent(createCongratulationScr())
         HEADER.classList.add('header-show')
     }
