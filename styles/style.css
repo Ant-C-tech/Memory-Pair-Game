@@ -78,6 +78,7 @@ header {
     font-size: 40px;
     color: #ffffff;
     border-bottom: 2px solid #616161;
+    text-shadow: 0px 0px 29px rgba(255, 255, 255, 0.75);
 }
 
 .titleBlock__subtitle {
@@ -94,7 +95,7 @@ header {
     margin-bottom: 10px;
     text-align: center;
     font-family: "Kaushan Script", cursive;
-    font-size: 22px;
+    font-size: 28px;
     color: #ffffff;
 }
 
@@ -156,11 +157,13 @@ header {
     border-radius: 20px;
     overflow: hidden;
     max-height: 230px;
-    transition: transform linear 0.55s;
+    transition: all linear 0.55s;
+    box-shadow: 7px 7px 10px 1px rgba(255, 255, 255, 0.25);
 }
 
 .card-rotate {
     transform: rotate3d(0, 1, 0, -180deg);
+    box-shadow: -7px 7px 10px 1px rgba(255, 255, 255, 0.25);
 }
 
 .cardBack {
@@ -183,6 +186,10 @@ header {
     padding-right: 30px;
 }
 
+.cardFace-rotate {
+    transform: rotate3d(0, 1, 0, 180deg);
+}
+
 .japText {
     margin: 10px 0;
     font-family: "Kaushan Script", cursive;
@@ -199,10 +206,6 @@ header {
     text-align: center;
     color: #ffffff;
     line-height: 1;
-}
-
-.cardFace-rotate {
-    transform: rotate3d(0, 1, 0, 180deg);
 }
 
 @keyframes text-flicker {
