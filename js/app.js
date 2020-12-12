@@ -5,7 +5,9 @@ import hiragana from './hiragana.js'
 const MAIN = document.querySelector('#main')
 const HEADER = document.querySelector('#header')
 const DESCRIPT = document.querySelector('#descript')
+const CARTS_NUMBER = 12;
 let TASK = []
+let attempts = 0
     //Music
 const GAMEPLAY_AUDIO = new Audio('./audio/Japanese_Countryside.mp3')
 GAMEPLAY_AUDIO.loop = true
@@ -60,7 +62,7 @@ function createStartGameScr() {
 function createGameField() {
     const gameField = document.createElement('div')
     gameField.classList.add('cardsContainer')
-    for (let index = 0; index < 12; index++) {
+    for (let index = 0; index < CARTS_NUMBER; index++) {
         const cardContent = TASK.splice(_getRandomIntInclusive(0, TASK.length - 1), 1)
 
         const card = document.createElement('div')
@@ -114,7 +116,7 @@ function hideElem(elem, effect) {
 
 function setTask() {
     TASK.push(hiragana[_getRandomIntInclusive(0, hiragana.length - 1)])
-    while (TASK.length < 6) {
+    while (TASK.length < CARTS_NUMBER / 2) {
         let currentItem = hiragana[_getRandomIntInclusive(0, hiragana.length - 1)]
         let flag = false
         for (const item of TASK) {
@@ -141,6 +143,7 @@ function checkAnswer() {
                     clearTimeout(timeOut)
                 }, 1000);
             }
+            attempts++
         } else {
             for (const card of openCards) {
                 let timeOut = setTimeout(() => {
@@ -152,6 +155,7 @@ function checkAnswer() {
                     clearTimeout(timeOut)
                 }, 1000);
             }
+            attempts++
         }
     }
 }
