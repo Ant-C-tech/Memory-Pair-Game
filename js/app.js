@@ -5,7 +5,11 @@ import hiragana from './hiragana.js'
 const MAIN = document.querySelector('#main')
 const HEADER = document.querySelector('#header')
 const DESCRIPT = document.querySelector('#descript')
-const CARTS_NUMBER = 12;
+
+const CARDS_NUMBER = 12;
+const ANIMATE_CSS_CLASS = 'animate__animated'
+const CARDS_HIDE_ANIMATION = 'animate__rotateOut'
+
 let TASK = []
 let attempts = 0
     //Music
@@ -62,11 +66,11 @@ function createStartGameScr() {
 function createGameField() {
     const gameField = document.createElement('div')
     gameField.classList.add('cardsContainer')
-    for (let index = 0; index < CARTS_NUMBER; index++) {
+    for (let index = 0; index < CARDS_NUMBER; index++) {
         const cardContent = TASK.splice(_getRandomIntInclusive(0, TASK.length - 1), 1)
 
         const card = document.createElement('div')
-        card.className = 'card animate__animated'
+        card.className = `card ${ANIMATE_CSS_CLASS}`
         card.setAttribute('data-value', cardContent[0].jap)
 
         const cardBack = document.createElement('img')
@@ -116,7 +120,7 @@ function hideElem(elem, effect) {
 
 function setTask() {
     TASK.push(hiragana[_getRandomIntInclusive(0, hiragana.length - 1)])
-    while (TASK.length < CARTS_NUMBER / 2) {
+    while (TASK.length < CARDS_NUMBER / 2) {
         let currentItem = hiragana[_getRandomIntInclusive(0, hiragana.length - 1)]
         let flag = false
         for (const item of TASK) {
@@ -157,6 +161,13 @@ function checkAnswer() {
             }
             attempts++
         }
+    }
+}
+
+function isWin() {
+    const playedCards = document.querySelectorAll(`.${CARDS_HIDE_ANIMATION}`)
+    if (playedCards.length === CARDS_NUMBER) {
+
     }
 }
 
