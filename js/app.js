@@ -157,7 +157,9 @@ function changeContent(content, callback) {
     MAIN.addEventListener('transitionend', function() {
         MAIN.innerHTML = ''
         MAIN.append(content)
-        callback()
+        if (callback) {
+            callback()
+        }
         MAIN.classList.remove('main-hide')
     }, { once: true })
 }

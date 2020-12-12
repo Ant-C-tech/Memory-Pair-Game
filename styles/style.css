@@ -1,9 +1,8 @@
 /* ========================= Common styles =========================*/
 
 html {
-    overflow: hidden;
+    overflow-x: hidden;
     background: linear-gradient(to right, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url("../img/bg.jpg") top;
-    /* background: url(../img/bg.jpg); */
 }
 
 *,
@@ -31,7 +30,6 @@ html {
 }
 
 body {
-    /* background-color: rgba(0, 0, 0, 0.85); */
     max-width: 1200px;
     margin: 0 auto;
     position: relative;
@@ -108,7 +106,6 @@ header {
 /* ========================= Main =========================*/
 
 .main {
-    min-height: 100vh;
     padding: 15px 0 5px;
     margin: 0 15px 50px;
     transition: opacity ease-in-out 1s;
@@ -127,6 +124,7 @@ header {
 
 .greeting,
 .startBtn {
+    text-align: center;
     width: fit-content;
     margin: 0 auto;
     font-family: "Kaushan Script", cursive;
@@ -306,6 +304,30 @@ header {
     100% {
         opacity: .9;
         text-shadow: 0px 0px 29px rgba(242, 22, 22, 1)
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .titleBlock__title {
+        font-size: 30px;
+    }
+    .titleBlock__subtitle {
+        font-size: 20px;
+        margin-bottom: 5px;
+    }
+    .titleBlock__text {
+        font-size: 22px;
+    }
+    .startBtnIco {
+        margin: 30px auto 20px;
+    }
+}
+
+@media screen and (max-width: 576px) {}
+
+@media screen and (max-height: 610px) {
+    .startBtnIco {
+        margin: 30px auto 20px;
     }
 }
 
