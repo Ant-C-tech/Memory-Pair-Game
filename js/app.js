@@ -2,6 +2,8 @@
 
 import hiragana from './hiragana.js'
 
+
+const BODY = document.querySelector('.body')
 const MAIN = document.querySelector('#main')
 const HEADER = document.querySelector('#header')
 const DESCRIPT = document.querySelector('#descript')
@@ -69,8 +71,9 @@ function createStartGameScr() {
 
     startBtnWrapper.append(startBtnIco, startBtn)
     startBtn.addEventListener('click', () => {
-        changeContent(createGameField())
+        changeContent(createGameField(), phoneAdaptation)
         hideElem(DESCRIPT, DESCRIPT_HIDE_ANIMATION, false)
+        window.addEventListener('resize', phoneAdaptation)
     }, { once: true })
 
     return startBtnWrapper
@@ -146,6 +149,8 @@ function createCongratulationScr() {
         TASK = []
         attempts = 0
         setTask()
+        window.addEventListener('resize', phoneAdaptation)
+        phoneAdaptation()
         changeContent(createGameField())
     }, { once: true })
 
@@ -226,9 +231,12 @@ function isWin() {
     const playedCards = document.querySelectorAll('.played')
     console.log(playedCards);
     if (playedCards.length === CARDS_NUMBER) {
+        window.removeEventListener('resize', phoneAdaptation)
         let timeout = setTimeout(() => {
             changeContent(createCongratulationScr())
             clearTimeout(timeout)
+            BODY.style.width = 'auto'
+            BODY.classList.remove('body-gamefield')
         }, 1500);
     }
 }
@@ -236,6 +244,17 @@ function isWin() {
 function showHeader() {
     HEADER.classList.add('header-show')
     showElem(DESCRIPT, DESCRIPT_SHOW_ANIMATION, true)
+}
+
+function phoneAdaptation() {
+    const mql = window.matchMedia("(orientation: landscape)");
+    if (mql.matches && document.documentElement.clientWidth <= 1025) {
+        BODY.style.width = document.documentElement.clientHeight + 'px'
+        BODY.classList.add('body-gamefield')
+    } else {
+        BODY.style.width = 'auto'
+        BODY.classList.remove('body-gamefield')
+    }
 }
 
 function _getRandomIntInclusive(min, max) {
