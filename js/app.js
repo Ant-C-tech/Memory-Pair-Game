@@ -20,17 +20,21 @@ let attempts = 0
     //Music
 const GAMEPLAY_AUDIO = new Audio('./audio/Japanese_Countryside.mp3')
 GAMEPLAY_AUDIO.loop = true
-GAMEPLAY_AUDIO.volume = 0.2
+GAMEPLAY_AUDIO.volume = 0.3
 
 
 setTask()
-MAIN.append(createGreeting())
+const timeout = setTimeout(() => {
+    changeContent(createGreeting())
+    clearTimeout(timeout)
+}, 1500);
+
 
 
 function setTask() {
     TASK.push(hiragana[_getRandomIntInclusive(0, hiragana.length - 1)])
     while (TASK.length < CARDS_NUMBER / 2) {
-        let currentItem = hiragana[_getRandomIntInclusive(0, hiragana.length - 1)]
+        const currentItem = hiragana[_getRandomIntInclusive(0, hiragana.length - 1)]
         let flag = false
         for (const item of TASK) {
             if (item.jap === currentItem.jap) {
@@ -201,7 +205,7 @@ function checkAnswer() {
         if (openCards[0].getAttribute('data-value') === openCards[1].getAttribute('data-value')) {
             for (const elem of openCards) {
                 elem.classList.add('played')
-                let timeOut = setTimeout(() => {
+                const timeOut = setTimeout(() => {
                     elem.classList.add(CARDS_HIDE_ANIMATION)
                     elem.addEventListener('animationend', function() {
                         elem.classList.remove('card-rotate')
@@ -213,7 +217,7 @@ function checkAnswer() {
             isWin()
         } else {
             for (const card of openCards) {
-                let timeOut = setTimeout(() => {
+                const timeOut = setTimeout(() => {
                     card.classList.remove('card-rotate')
                     card.children[1].classList.remove('cardFace-rotate')
                     card.children[1].addEventListener('transitionend', function() {
@@ -232,7 +236,7 @@ function isWin() {
     console.log(playedCards);
     if (playedCards.length === CARDS_NUMBER) {
         window.removeEventListener('resize', phoneAdaptation)
-        let timeout = setTimeout(() => {
+        const timeout = setTimeout(() => {
             changeContent(createCongratulationScr())
             clearTimeout(timeout)
             BODY.style.width = 'auto'

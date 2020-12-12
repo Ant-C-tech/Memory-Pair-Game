@@ -47,7 +47,6 @@ html {
     -o-transform-origin: left top;
     transform-origin: left top;
     width: 320px;
-    /*Разрешение экрана iPhone*/
     position: absolute;
     top: 100%;
     left: 0;
@@ -125,7 +124,7 @@ header {
 
 .main {
     padding: 15px 0 5px;
-    margin: 0 15px 50px;
+    margin: 0 15px 10px;
     transition: opacity ease-in-out 1s;
 }
 
