@@ -8,6 +8,9 @@ const DESCRIPT = document.querySelector('#descript')
 
 const CARDS_NUMBER = 12;
 const ANIMATE_CSS_CLASS = 'animate__animated'
+const ANIMATE_DELAY = 'animate__delay-3s'
+const DESCRIPT_HIDE_ANIMATION = 'animate__zoomOut'
+const DESCRIPT_SHOW_ANIMATION = 'animate__zoomIn'
 const CARDS_HIDE_ANIMATION = 'animate__rotateOut'
 
 let TASK = []
@@ -48,6 +51,8 @@ function createGreeting() {
         GAMEPLAY_AUDIO.play()
         changeContent(createStartGameScr())
         HEADER.classList.add('header-show')
+            // DESCRIPT.classList.add(ANIMATE_DELAY)
+        showElem(DESCRIPT, DESCRIPT_SHOW_ANIMATION, true)
     }, { once: true })
 
     return greeting
@@ -73,7 +78,7 @@ function createStartGameScr() {
     startBtnWrapper.append(startBtnIco, startBtn, startBtnImg)
     startBtn.addEventListener('click', () => {
         changeContent(createGameField())
-        hideElem(DESCRIPT, "animate__zoomOut")
+        hideElem(DESCRIPT, DESCRIPT_HIDE_ANIMATION, false)
     }, { once: true })
 
     return startBtnWrapper
@@ -119,7 +124,45 @@ function createGameField() {
 }
 
 function createCongratulationScr() {
-    console.log('work');
+
+    const congratulationWrapper = new DocumentFragment()
+
+    const congratulationIco = document.createElement('img')
+    congratulationIco.setAttribute('src', 'img/lucky-cat-toy-svgrepo-com.svg')
+    congratulationIco.setAttribute('alt', 'mentor')
+    congratulationIco.classList.add('congratulationIco')
+
+    const congratulation = document.createElement('h3')
+    congratulation.textContent = 'Congratulation!!!'
+    congratulation.classList.add('congratulation')
+
+    const congratulationText = document.createElement('p')
+    congratulationText.innerHTML = `It took you <span class="attempts">${attempts}</span> attempts!`
+    congratulationText.classList.add('congratulationText')
+
+    const congratulationSubText = document.createElement('p')
+    congratulationSubText.textContent = `Now, you maybe feel yourself true ninja or maybe even samurai... But remember...`
+    congratulationSubText.classList.add('congratulationSubText')
+
+    const newGameBtn = document.createElement('h3')
+    newGameBtn.textContent = 'A samurai has no goal, only path...'
+    newGameBtn.classList.add('newGame')
+
+    const startBtnImg = document.createElement('img')
+    startBtnImg.setAttribute('src', 'img/branches-with-leaves-svgrepo-com.svg')
+    startBtnImg.setAttribute('alt', 'branch with leaves')
+    startBtnImg.classList.add('startBtnImg')
+
+    congratulationWrapper.append(congratulationIco, congratulation, congratulationText, congratulationSubText, startBtnImg, newGameBtn)
+
+    newGameBtn.addEventListener('click', function() {
+        TASK = []
+        attempts = 0
+        setTask()
+        changeContent(createGameField())
+    }, { once: true })
+
+    return congratulationWrapper
 }
 
 function changeContent(content) {
@@ -131,10 +174,29 @@ function changeContent(content) {
     }, { once: true })
 }
 
-function hideElem(elem, effect) {
+function showElem(elem, effect, delay) {
+    if (delay) {
+        elem.classList.add(ANIMATE_DELAY)
+    } else {
+        elem.classList.remove(ANIMATE_DELAY)
+    }
+    elem.style.display = 'block'
+    elem.classList.add(effect)
+    elem.addEventListener('animationend', function() {
+        elem.classList.remove(effect)
+    }, { once: true })
+}
+
+function hideElem(elem, effect, delay) {
+    if (delay) {
+        elem.classList.add(ANIMATE_DELAY)
+    } else {
+        elem.classList.remove(ANIMATE_DELAY)
+    }
     elem.classList.add(effect)
     elem.addEventListener('animationend', function() {
         elem.style.display = 'none'
+        elem.classList.remove(effect)
     }, { once: true })
 }
 
@@ -174,9 +236,10 @@ function isWin() {
     const playedCards = document.querySelectorAll('.played')
     console.log(playedCards);
     if (playedCards.length === CARDS_NUMBER) {
-        console.log('next');
-        changeContent(createCongratulationScr())
-        HEADER.classList.add('header-show')
+        let timeout = setTimeout(() => {
+            changeContent(createCongratulationScr())
+            clearTimeout(timeout)
+        }, 1500);
     }
 }
 

@@ -208,6 +208,50 @@ header {
     line-height: 1;
 }
 
+.congratulation,
+.congratulationText {
+    width: fit-content;
+    margin: 0 auto;
+    font-family: "Kaushan Script", cursive;
+    font-size: 40px;
+    letter-spacing: 0.2em;
+    color: #ffffff;
+}
+
+.congratulationSubText {
+    width: fit-content;
+    margin: 50px auto;
+    text-align: center;
+    font-family: "Kaushan Script", cursive;
+    font-size: 32px;
+    /* letter-spacing: 0.2em; */
+    color: #ffffff;
+}
+
+.newGame,
+.attempts {
+    width: fit-content;
+    margin: 0 auto;
+    font-family: "Kaushan Script", cursive;
+    font-size: 32px;
+    letter-spacing: 0.2em;
+    color: #ffffff;
+    animation: text-flicker 3s linear infinite;
+    cursor: pointer;
+}
+
+.congratulation,
+.congratulationText {
+    margin-bottom: 10px;
+}
+
+.congratulationIco {
+    display: block;
+    margin: 20px auto 0;
+    width: 80px;
+    margin-bottom: 20px;
+}
+
 @keyframes text-flicker {
     0% {
         opacity: 0.1;
