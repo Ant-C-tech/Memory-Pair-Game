@@ -18,10 +18,26 @@ GAMEPLAY_AUDIO.loop = true
 GAMEPLAY_AUDIO.volume = 0.2
 
 
-MAIN.append(createGreeting())
 setTask()
-TASK = TASK.concat(TASK)
+MAIN.append(createGreeting())
 
+
+function setTask() {
+    TASK.push(hiragana[_getRandomIntInclusive(0, hiragana.length - 1)])
+    while (TASK.length < CARDS_NUMBER / 2) {
+        let currentItem = hiragana[_getRandomIntInclusive(0, hiragana.length - 1)]
+        let flag = false
+        for (const item of TASK) {
+            if (item.jap === currentItem.jap) {
+                flag = true
+            }
+        }
+        if (flag === false) {
+            TASK.push(currentItem)
+        }
+    }
+    TASK = TASK.concat(TASK)
+}
 
 function createGreeting() {
     const greeting = document.createElement('h3')
@@ -102,6 +118,10 @@ function createGameField() {
     return gameField
 }
 
+function createCongratulationScr() {
+    console.log('work');
+}
+
 function changeContent(content) {
     MAIN.classList.add('main-hide')
     MAIN.addEventListener('transitionend', function() {
@@ -118,22 +138,6 @@ function hideElem(elem, effect) {
     }, { once: true })
 }
 
-function setTask() {
-    TASK.push(hiragana[_getRandomIntInclusive(0, hiragana.length - 1)])
-    while (TASK.length < CARDS_NUMBER / 2) {
-        let currentItem = hiragana[_getRandomIntInclusive(0, hiragana.length - 1)]
-        let flag = false
-        for (const item of TASK) {
-            if (item.jap === currentItem.jap) {
-                flag = true
-            }
-        }
-        if (flag === false) {
-            TASK.push(currentItem)
-        }
-    }
-}
-
 function checkAnswer() {
     const openCards = document.querySelectorAll('.card-rotate')
     if (openCards.length === 2) {
@@ -148,6 +152,7 @@ function checkAnswer() {
                 }, 1000);
             }
             attempts++
+            isWin()
         } else {
             for (const card of openCards) {
                 let timeOut = setTimeout(() => {
@@ -167,7 +172,8 @@ function checkAnswer() {
 function isWin() {
     const playedCards = document.querySelectorAll(`.${CARDS_HIDE_ANIMATION}`)
     if (playedCards.length === CARDS_NUMBER) {
-
+        changeContent(createCongratulationScr())
+        HEADER.classList.add('header-show')
     }
 }
 
