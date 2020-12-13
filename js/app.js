@@ -23,13 +23,16 @@ GAMEPLAY_AUDIO.loop = true
 GAMEPLAY_AUDIO.volume = 0.3
 
 
-setTask()
-const timeout = setTimeout(() => {
-    changeContent(createGreeting())
-    clearTimeout(timeout)
-}, 1500);
+initApp()
 
 
+function initApp() {
+    setTask()
+    const timeout = setTimeout(() => {
+        changeContent(createGreeting())
+        clearTimeout(timeout)
+    }, 1500);
+}
 
 function setTask() {
     TASK.push(hiragana[_getRandomIntInclusive(0, hiragana.length - 1)])
@@ -110,11 +113,6 @@ function createGameField() {
         card.append(cardBack, cardFace)
 
         card.addEventListener('click', () => {
-            MAIN.classList.add('main-notActive')
-            const timeOut = setTimeout(() => {
-                MAIN.classList.remove('main-notActive')
-                clearTimeout(timeOut)
-            }, 1000);
             card.classList.add('card-rotate')
             cardBack.classList.add('cardBack-rotate')
             cardBack.addEventListener('transitionend', function() {
@@ -205,16 +203,18 @@ function hideElem(elem, effect, delay) {
 }
 
 function checkAnswer() {
+    MAIN.classList.add('main-notActive')
     const openCards = document.querySelectorAll('.card-rotate')
     if (openCards.length === 2) {
         if (openCards[0].getAttribute('data-value') === openCards[1].getAttribute('data-value')) {
-            MAIN.classList.add('main-notActive')
+
             for (const elem of openCards) {
                 elem.classList.add('played')
                 const timeOut = setTimeout(() => {
                     elem.classList.add(CARDS_HIDE_ANIMATION)
                     elem.addEventListener('animationend', function() {
                         elem.classList.remove('card-rotate')
+                        MAIN.classList.remove('main-notActive')
                     }, { once: true })
                     clearTimeout(timeOut)
                 }, 1000);
@@ -222,20 +222,23 @@ function checkAnswer() {
             attempts++
             isWin()
         } else {
-            MAIN.classList.add('main-notActive')
             for (const card of openCards) {
                 const timeOut = setTimeout(() => {
                     card.classList.remove('card-rotate')
                     card.children[1].classList.remove('cardFace-rotate')
                     card.children[1].addEventListener('transitionend', function() {
                         card.children[0].classList.remove('cardBack-rotate')
+                        MAIN.classList.remove('main-notActive')
                     }, { once: true })
                     clearTimeout(timeOut)
                 }, 1000);
             }
             attempts++
         }
+    } else {
+        MAIN.classList.remove('main-notActive')
     }
+
 }
 
 function isWin() {
