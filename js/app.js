@@ -24,6 +24,9 @@ GAMEPLAY_AUDIO.volume = 0.3
 
 
 initApp()
+document.addEventListener('dblclick', function(event) {
+    event.preventDefault();
+})
 
 
 function initApp() {
