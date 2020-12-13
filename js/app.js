@@ -89,6 +89,7 @@ function createStartGameScr() {
 function createGameField() {
     const gameField = document.createElement('div')
     gameField.classList.add('cardsContainer')
+
     for (let index = 0; index < CARDS_NUMBER; index++) {
         const cardContent = TASK.splice(_getRandomIntInclusive(0, TASK.length - 1), 1)
 
@@ -126,7 +127,6 @@ function createGameField() {
 }
 
 function createCongratulationScr() {
-
     const congratulationWrapper = new DocumentFragment()
 
     const congratulationIco = document.createElement('img')
@@ -207,7 +207,6 @@ function checkAnswer() {
     const openCards = document.querySelectorAll('.card-rotate')
     if (openCards.length === 2) {
         if (openCards[0].getAttribute('data-value') === openCards[1].getAttribute('data-value')) {
-
             for (const elem of openCards) {
                 elem.classList.add('played')
                 const timeOut = setTimeout(() => {
@@ -238,7 +237,6 @@ function checkAnswer() {
     } else {
         MAIN.classList.remove('main-notActive')
     }
-
 }
 
 function isWin() {
