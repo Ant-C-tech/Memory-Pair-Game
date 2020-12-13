@@ -7,7 +7,6 @@ html {
     /* iOS Safari */
     -webkit-user-select: none;
     /* Chrome/Safari/Opera */
-    -khtml-user-select: none;
     /* Konqueror */
     -moz-user-select: none;
     /* Firefox */
@@ -48,15 +47,7 @@ html {
 }
 
 .body-gamefield {
-    -webkit-transform: rotate(-90deg);
-    -moz-transform: rotate(-90deg);
-    -ms-transform: rotate(-90deg);
-    -o-transform: rotate(-90deg);
     transform: rotate(-90deg);
-    -webkit-transform-origin: left top;
-    -moz-transform-origin: left top;
-    -ms-transform-origin: left top;
-    -o-transform-origin: left top;
     transform-origin: left top;
     width: 320px;
     position: absolute;
@@ -96,6 +87,8 @@ header {
 }
 
 .titleBlock {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
     width: fit-content;
     margin: 0 auto;
 }
@@ -158,12 +151,15 @@ header {
 .greeting,
 .startBtn {
     text-align: center;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
     width: fit-content;
     margin: 0 auto;
     font-family: "Kaushan Script", cursive;
     font-size: 32px;
     letter-spacing: 0.7em;
     color: #ffffff;
+    -webkit-animation: text-flicker 3s linear infinite;
     animation: text-flicker 3s linear infinite;
     cursor: pointer;
 }
@@ -248,6 +244,8 @@ header {
 
 .congratulation,
 .congratulationText {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
     width: fit-content;
     margin: 0 auto;
     font-family: "Kaushan Script", cursive;
@@ -257,6 +255,8 @@ header {
 }
 
 .congratulationSubText {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
     width: fit-content;
     margin: 50px auto;
     text-align: center;
@@ -267,12 +267,15 @@ header {
 
 .newGame,
 .attempts {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
     width: fit-content;
     margin: 0 auto;
     font-family: "Kaushan Script", cursive;
     font-size: 32px;
     letter-spacing: 0.2em;
     color: #ffffff;
+    -webkit-animation: text-flicker 3s linear infinite;
     animation: text-flicker 3s linear infinite;
     cursor: pointer;
 }
@@ -287,6 +290,57 @@ header {
     margin: 20px auto 0;
     width: 80px;
     margin-bottom: 20px;
+}
+
+@-webkit-keyframes text-flicker {
+    0% {
+        opacity: 0.1;
+        text-shadow: 0px 0px 29px rgba(242, 22, 22, 1);
+    }
+    2% {
+        opacity: 1;
+        text-shadow: 0px 0px 29px rgba(242, 22, 22, 1);
+    }
+    8% {
+        opacity: 0.1;
+        text-shadow: 0px 0px 29px rgba(242, 22, 22, 1);
+    }
+    9% {
+        opacity: 1;
+        text-shadow: 0px 0px 29px rgba(242, 22, 22, 1);
+    }
+    12% {
+        opacity: 0.1;
+        text-shadow: 0px 0px rgba(242, 22, 22, 1);
+    }
+    20% {
+        opacity: 1;
+        text-shadow: 0px 0px 29px rgba(242, 22, 22, 1)
+    }
+    25% {
+        opacity: 0.3;
+        text-shadow: 0px 0px 29px rgba(242, 22, 22, 1)
+    }
+    30% {
+        opacity: 1;
+        text-shadow: 0px 0px 29px rgba(242, 22, 22, 1)
+    }
+    70% {
+        opacity: 0.7;
+        text-shadow: 0px 0px 29px rgba(242, 22, 22, 1)
+    }
+    72% {
+        opacity: 0.2;
+        text-shadow: 0px 0px 29px rgba(242, 22, 22, 1)
+    }
+    77% {
+        opacity: .9;
+        text-shadow: 0px 0px 29px rgba(242, 22, 22, 1)
+    }
+    100% {
+        opacity: .9;
+        text-shadow: 0px 0px 29px rgba(242, 22, 22, 1)
+    }
 }
 
 @keyframes text-flicker {
