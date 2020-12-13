@@ -340,6 +340,19 @@ header {
     }
 }
 
+@media screen and (max-width: 1200px) {
+    .cardFace {
+        top: 40px;
+        padding-right: 20px;
+    }
+    .japText {
+        font-size: 80px;
+    }
+    .engText {
+        font-size: 30px;
+    }
+}
+
 @media screen and (max-width: 768px) {
     .titleBlock__title {
         font-size: 30px;
@@ -353,10 +366,6 @@ header {
     }
     .startBtnIco {
         margin: 30px auto 20px;
-    }
-    .cardFace {
-        top: 40px;
-        padding-right: 20px;
     }
     .japText {
         font-size: 50px;
@@ -387,6 +396,17 @@ header {
         margin: 5px;
         width: calc(25% - 10px);
         border-radius: 8px;
+    }
+    .congratulation,
+    .congratulationText {
+        text-align: center;
+        font-size: 28px;
+    }
+    .congratulationSubText {
+        font-size: 24px;
+    }
+    .congratulationSubText {
+        font-size: 24px;
     }
 }
 
@@ -432,7 +452,7 @@ header {
 
 /* Screen height */
 
-@media screen and (max-height: 768px) {
+@media screen and (orientation: landscape) and (max-height: 768px) {
     .titleBlock__title {
         font-size: 30px;
     }
@@ -458,7 +478,7 @@ header {
     }
 }
 
-@media screen and (max-height: 610px) {
+@media screen and (orientation: landscape) and (max-height: 610px) {
     .cardFace {
         top: 25px;
         padding-right: 15px;
@@ -474,7 +494,7 @@ header {
     }
 }
 
-@media screen and (max-height: 576px) {
+@media screen and (orientation: landscape) and (max-height: 576px) {
     .greeting {
         margin-top: 10px;
     }
@@ -486,9 +506,20 @@ header {
         width: calc(25% - 10px);
         border-radius: 8px;
     }
+    .congratulation,
+    .congratulationText {
+        text-align: center;
+        font-size: 28px;
+    }
+    .congratulationSubText {
+        font-size: 24px;
+    }
+    .congratulationSubText {
+        font-size: 24px;
+    }
 }
 
-@media screen and (max-height: 450px) {
+@media screen and (orientation: landscape) and (max-height: 450px) {
     .cardFace {
         top: 10px;
         padding-right: 10px;
@@ -501,7 +532,7 @@ header {
     }
 }
 
-@media screen and (max-height: 380px) {
+@media screen and (orientation: landscape) and (max-height: 380px) {
     .titleBlock__title {
         font-size: 30px;
     }
@@ -521,7 +552,7 @@ header {
     }
 }
 
-@media screen and (max-height: 325px) {
+@media screenand and (orientation: landscape) and (max-height: 325px) {
     .cardFace {
         top: 4px;
         padding-right: 4px;

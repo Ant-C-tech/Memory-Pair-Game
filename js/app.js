@@ -24,9 +24,6 @@ GAMEPLAY_AUDIO.volume = 0.3
 
 
 initApp()
-document.addEventListener('dblclick', function(event) {
-    event.preventDefault();
-})
 
 
 function initApp() {
@@ -150,7 +147,7 @@ function createCongratulationScr() {
     congratulationSubText.classList.add('congratulationSubText')
 
     const newGameBtn = document.createElement('h3')
-    newGameBtn.textContent = 'A samurai has no goal, only path...'
+    newGameBtn.textContent = 'A samurai has no goal, only a path...'
     newGameBtn.classList.add('newGame')
 
     congratulationWrapper.append(congratulationIco, congratulation, congratulationText, congratulationSubText, newGameBtn)
