@@ -172,7 +172,7 @@ header {
     border: 2px solid #fff;
     border-radius: 20px;
     overflow: hidden;
-    max-height: 230px;
+    max-height: 220px;
     transition: all linear 0.55s;
     box-shadow: 7px 7px 10px 1px rgba(255, 255, 255, 0.25);
 }
