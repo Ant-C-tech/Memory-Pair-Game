@@ -115,10 +115,6 @@ header {
     transition: opacity ease-in-out 1s;
 }
 
-.main-notActive {
-    pointer-events: none;
-}
-
 .main-hide {
     opacity: 0;
 }
@@ -166,6 +162,7 @@ header {
 }
 
 .card {
+    cursor: pointer;
     position: relative;
     margin: 15px;
     width: calc(25% - 30px);
@@ -247,7 +244,7 @@ header {
     color: #ffffff;
 }
 
-.newGame,
+.newGameBtn,
 .attempts {
     width: -webkit-fit-content;
     width: -moz-fit-content;

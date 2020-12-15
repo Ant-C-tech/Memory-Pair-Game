@@ -2,22 +2,38 @@
 
 import hiragana from './hiragana.js'
 
+let _task = []
+let _attempts = 0
 
 const BODY = document.querySelector('.body')
 const MAIN = document.querySelector('#main')
 const HEADER = document.querySelector('#header')
 const DESCRIPT = document.querySelector('#descript')
 
-const CARDS_NUMBER = 12;
 const ANIMATE_CSS_CLASS = 'animate__animated'
 const ANIMATE_DELAY = 'animate__delay-3s'
 const DESCRIPT_HIDE_ANIMATION = 'animate__zoomOut'
 const DESCRIPT_SHOW_ANIMATION = 'animate__zoomIn'
 const CARDS_HIDE_ANIMATION = 'animate__rotateOut'
 
-let TASK = []
-let attempts = 0
-    //Music
+const CARDS_NUMBER = 12;
+const GAMEPLAY_DELAY = 1500
+const MOBILE_BREAKPOINT = 1025
+
+const GREETING_TEXT = 'Kottans present'
+const START_GAME_TEXT = 'Start Game'
+const CONGRATULATIONS_TITLE = 'Congratulation!!!'
+const CONGRATULATIONS_SUBTITLE_PART1 = `It took you <span class="attempts">`
+const CONGRATULATIONS_SUBTITLE_PART2 = `</span> attempts!`
+const CONGRATULATIONS_SUBTEXT = `Now, you maybe feel yourself true ninja or maybe even samurai... But remember...`
+const CONGRATULATIONS_TEXT = `A samurai has no goal, only a path...`
+
+const GAME_ICON = 'img/lucky-cat-toy-svgrepo-com.svg'
+const GAME_ICON_ALT = 'cat'
+const CARD_BACK = 'img/card-back2.jpg'
+const CARD_BACK_ALT = 'japanese ornament'
+
+//Music
 const GAMEPLAY_AUDIO = new Audio('./audio/Japanese_Countryside.mp3')
 GAMEPLAY_AUDIO.loop = true
 GAMEPLAY_AUDIO.volume = 0.3
@@ -25,143 +41,96 @@ GAMEPLAY_AUDIO.volume = 0.3
 
 initApp()
 
-
 function initApp() {
     setTask()
     const timeout = setTimeout(() => {
         changeContent(createGreeting())
         clearTimeout(timeout)
-    }, 1500);
+    }, GAMEPLAY_DELAY);
+    addListeners()
 }
 
 function setTask() {
-    TASK.push(hiragana[_getRandomIntInclusive(0, hiragana.length - 1)])
-    while (TASK.length < CARDS_NUMBER / 2) {
-        const currentItem = hiragana[_getRandomIntInclusive(0, hiragana.length - 1)]
-        let flag = false
-        for (const item of TASK) {
-            if (item.jap === currentItem.jap) {
-                flag = true
-            }
-        }
-        if (flag === false) {
-            TASK.push(currentItem)
-        }
+    const taskElemIndexInHiragana = []
+    for (let index = 0; index < hiragana.length; index++) {
+        taskElemIndexInHiragana.push(index)
     }
-    TASK = TASK.concat(TASK)
+    while (taskElemIndexInHiragana.length > CARDS_NUMBER / 2) {
+        taskElemIndexInHiragana.splice(_getRandomIntInclusive(0, taskElemIndexInHiragana.length - 1), 1)
+    }
+    for (const index of taskElemIndexInHiragana) {
+        _task.push(hiragana[index])
+        _task.unshift(hiragana[index])
+    }
+}
+
+function addListeners() {
+    MAIN.addEventListener('click', function({ target }) {
+        if (target.classList.contains('greeting')) {
+            GAMEPLAY_AUDIO.play()
+            changeContent(createStartGameScr(), showHeader)
+        } else if (target.classList.contains('startBtn')) {
+            changeContent(createGameField(), phoneAdaptation)
+            hideElem(DESCRIPT, DESCRIPT_HIDE_ANIMATION, false)
+            window.addEventListener('resize', phoneAdaptation)
+        } else if (target.classList.contains('cardsContainer') || target.classList.contains('card')) {
+            return false
+        } else if (target.classList.contains('cardBack')) {
+            target.parentElement.classList.add('notActive')
+            target.parentElement.classList.add('card-rotate')
+            target.classList.add('cardBack-rotate')
+            target.addEventListener('transitionend', function() {
+                target.nextElementSibling.classList.add('cardFace-rotate')
+            }, { once: true })
+            checkAnswer()
+        } else if (target.classList.contains('newGameBtn')) {
+            _task = []
+            _attempts = 0
+            setTask()
+            window.addEventListener('resize', phoneAdaptation)
+            phoneAdaptation()
+            changeContent(createGameField())
+        }
+    })
 }
 
 function createGreeting() {
-    const greeting = document.createElement('h3')
-    greeting.textContent = 'Kottans present'
-    greeting.classList.add('greeting')
-
-    greeting.addEventListener('click', function() {
-        GAMEPLAY_AUDIO.play()
-        changeContent(createStartGameScr(), showHeader)
-    }, { once: true })
-
+    const greeting = `<h3 class="greeting">${GREETING_TEXT}</h3>`
     return greeting
 }
 
 function createStartGameScr() {
-    const startBtnWrapper = new DocumentFragment()
-
-    const startBtnIco = document.createElement('img')
-    startBtnIco.setAttribute('src', 'img/lucky-cat-toy-svgrepo-com.svg')
-    startBtnIco.setAttribute('alt', 'mentor')
-    startBtnIco.classList.add('startBtnIco')
-
-    const startBtn = document.createElement('h3')
-    startBtn.textContent = 'Start Game'
-    startBtn.classList.add('startBtn')
-
-    startBtnWrapper.append(startBtnIco, startBtn)
-    startBtn.addEventListener('click', () => {
-        changeContent(createGameField(), phoneAdaptation)
-        hideElem(DESCRIPT, DESCRIPT_HIDE_ANIMATION, false)
-        window.addEventListener('resize', phoneAdaptation)
-    }, { once: true })
-
+    const startBtnWrapper = `<img class="startBtnIco" src="${GAME_ICON}" alt="${GAME_ICON_ALT}">
+                            <h3 class="startBtn">${START_GAME_TEXT}</h3>`
     return startBtnWrapper
 }
 
 function createGameField() {
-    const gameField = document.createElement('div')
-    gameField.classList.add('cardsContainer')
+    let gameField = '<div class="cardsContainer">'
 
     for (let index = 0; index < CARDS_NUMBER; index++) {
-        const cardContent = TASK.splice(_getRandomIntInclusive(0, TASK.length - 1), 1)
-
-        const card = document.createElement('div')
-        card.className = `card ${ANIMATE_CSS_CLASS}`
-        card.setAttribute('data-value', cardContent[0].jap)
-
-        const cardBack = document.createElement('img')
-        cardBack.setAttribute('src', 'img/card-back2.jpg')
-        cardBack.setAttribute('alt', 'japanese ornament')
-        cardBack.classList.add('cardBack')
-
-        const cardFace = document.createElement('div')
-        cardFace.classList.add('cardFace')
-        const japText = document.createElement('p')
-        japText.innerText = cardContent[0].jap
-        japText.classList.add('japText')
-        const engText = document.createElement('p')
-        engText.innerText = cardContent[0].eng
-        engText.classList.add('engText')
-        cardFace.append(japText, engText)
-        card.append(cardBack, cardFace)
-
-        card.addEventListener('click', () => {
-            card.classList.add('main-notActive')
-            card.classList.add('card-rotate')
-            cardBack.classList.add('cardBack-rotate')
-            cardBack.addEventListener('transitionend', function() {
-                cardFace.classList.add('cardFace-rotate')
-            }, { once: true })
-            checkAnswer()
-        })
-        gameField.appendChild(card)
+        const cardContent = _task.splice(_getRandomIntInclusive(0, _task.length - 1), 1)
+        const card = `<div class="card ${ANIMATE_CSS_CLASS}" data-value="${cardContent[0].jap}">
+                        <img class="cardBack" src="${CARD_BACK}" alt="${CARD_BACK_ALT}">
+                        <div class="cardFace">
+                            <p class="japText">${cardContent[0].jap}</p>
+                            <p class="engText">${cardContent[0].eng}</p>
+                        </div>
+                    </div>`
+        gameField += card
+        if (index === CARDS_NUMBER - 1) {
+            gameField += '</div>'
+        }
     }
     return gameField
 }
 
 function createCongratulationScr() {
-    const congratulationWrapper = new DocumentFragment()
-
-    const congratulationIco = document.createElement('img')
-    congratulationIco.setAttribute('src', 'img/lucky-cat-toy-svgrepo-com.svg')
-    congratulationIco.setAttribute('alt', 'mentor')
-    congratulationIco.classList.add('congratulationIco')
-
-    const congratulation = document.createElement('h3')
-    congratulation.textContent = 'Congratulation!!!'
-    congratulation.classList.add('congratulation')
-
-    const congratulationText = document.createElement('p')
-    congratulationText.innerHTML = `It took you <span class="attempts">${attempts}</span> attempts!`
-    congratulationText.classList.add('congratulationText')
-
-    const congratulationSubText = document.createElement('p')
-    congratulationSubText.textContent = `Now, you maybe feel yourself true ninja or maybe even samurai... But remember...`
-    congratulationSubText.classList.add('congratulationSubText')
-
-    const newGameBtn = document.createElement('h3')
-    newGameBtn.textContent = 'A samurai has no goal, only a path...'
-    newGameBtn.classList.add('newGame')
-
-    congratulationWrapper.append(congratulationIco, congratulation, congratulationText, congratulationSubText, newGameBtn)
-
-    newGameBtn.addEventListener('click', function() {
-        TASK = []
-        attempts = 0
-        setTask()
-        window.addEventListener('resize', phoneAdaptation)
-        phoneAdaptation()
-        changeContent(createGameField())
-    }, { once: true })
-
+    const congratulationWrapper = `<img class="congratulationIco" src="${GAME_ICON}" alt="cat">
+                                    <h3 class="congratulation">${CONGRATULATIONS_TITLE}</h3>
+                                    <p class="congratulationText">${CONGRATULATIONS_SUBTITLE_PART1}${_attempts}${CONGRATULATIONS_SUBTITLE_PART2}</p>
+                                    <p class="congratulationSubText">${CONGRATULATIONS_SUBTEXT}</p>
+                                    <h3 class="newGameBtn">${CONGRATULATIONS_TEXT}</h3>`
     return congratulationWrapper
 }
 
@@ -169,10 +138,8 @@ function changeContent(content, callback) {
     MAIN.classList.add('main-hide')
     MAIN.addEventListener('transitionend', function() {
         MAIN.innerHTML = ''
-        MAIN.append(content)
-        if (callback) {
-            callback()
-        }
+        MAIN.innerHTML = content
+        callback && callback()
         MAIN.classList.remove('main-hide')
     }, { once: true })
 }
@@ -183,7 +150,7 @@ function showElem(elem, effect, delay) {
     } else {
         elem.classList.remove(ANIMATE_DELAY)
     }
-    elem.style.display = 'block'
+    elem.classList.add('d-block')
     elem.classList.add(effect)
     elem.addEventListener('animationend', function() {
         elem.classList.remove(effect)
@@ -198,13 +165,13 @@ function hideElem(elem, effect, delay) {
     }
     elem.classList.add(effect)
     elem.addEventListener('animationend', function() {
-        elem.style.display = 'none'
+        elem.classList.add('d-none')
         elem.classList.remove(effect)
     }, { once: true })
 }
 
 function checkAnswer() {
-    MAIN.classList.add('main-notActive')
+    MAIN.classList.add('notActive')
     const openCards = document.querySelectorAll('.card-rotate')
     if (openCards.length === 2) {
         if (openCards[0].getAttribute('data-value') === openCards[1].getAttribute('data-value')) {
@@ -214,13 +181,12 @@ function checkAnswer() {
                     card.classList.add(CARDS_HIDE_ANIMATION)
                     card.addEventListener('animationend', function() {
                         card.classList.remove('card-rotate')
-                        card.classList.remove('main-notActive')
-                        MAIN.classList.remove('main-notActive')
+                        MAIN.classList.remove('notActive')
                     }, { once: true })
                     clearTimeout(timeOut)
                 }, 1000);
             }
-            attempts++
+            _attempts++
             isWin()
         } else {
             for (const card of openCards) {
@@ -229,16 +195,16 @@ function checkAnswer() {
                     card.children[1].classList.remove('cardFace-rotate')
                     card.children[1].addEventListener('transitionend', function() {
                         card.children[0].classList.remove('cardBack-rotate')
-                        card.classList.remove('main-notActive')
-                        MAIN.classList.remove('main-notActive')
+                        card.classList.remove('notActive')
+                        MAIN.classList.remove('notActive')
                     }, { once: true })
                     clearTimeout(timeOut)
                 }, 1000);
             }
-            attempts++
+            _attempts++
         }
     } else {
-        MAIN.classList.remove('main-notActive')
+        MAIN.classList.remove('notActive')
     }
 }
 
@@ -248,10 +214,10 @@ function isWin() {
         window.removeEventListener('resize', phoneAdaptation)
         const timeout = setTimeout(() => {
             changeContent(createCongratulationScr())
-            clearTimeout(timeout)
-            BODY.style.width = 'auto'
+            BODY.classList.add('w-auto')
             BODY.classList.remove('body-gamefield')
-        }, 1500);
+            clearTimeout(timeout)
+        }, GAMEPLAY_DELAY);
     }
 }
 
@@ -262,11 +228,11 @@ function showHeader() {
 
 function phoneAdaptation() {
     const mql = window.matchMedia("(orientation: landscape)");
-    if (mql.matches && document.documentElement.clientWidth <= 1025) {
+    if (mql.matches && document.documentElement.clientWidth <= MOBILE_BREAKPOINT) {
         BODY.style.width = document.documentElement.clientHeight + 'px'
         BODY.classList.add('body-gamefield')
     } else {
-        BODY.style.width = 'auto'
+        BODY.classList.add('w-auto')
         BODY.classList.remove('body-gamefield')
     }
 }
